@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Check if the environment variable PYFILE is set
+if [ -z "$PYFILE" ]; then
+    echo "Error: PYFILE environment variable is not set."
+    exit 1
+fi
+
+if [ ! -f "$PYFILE" ]; then
+    echo "Error: File $PYFILE does not exist."
+    exit 1
+fi
+
+# Extract the base name of the Python file (without extension)
+base_name=$(basename "$PYFILE" .py)
+
+# Set the output file name
+output_file="${base_name}.pyc"
+
+# Compile the Python file
+echo "Compiling $PYFILE ..."
+python3 -m py_compile "$PYFILE"
+
+# Find the compiled file in the __pycache__ directory
+compiled_file=$(find __pycache__ -name "${base_name}.cpython-*.pyc")
+
+# Check if the compiled file was found
+if [ -z "$compiled_file" ]; then
+    echo "Error: Compiled file not found."
+    exit 1
+fi
+
+# Move the compiled file to the desired location
+mv "$compiled_file" "$output_file"
+
+# Clean up the __pycache__ directory if empty
+if [ ! "$(ls -A __pycache__)" ]; then
+    rmdir __pycache__
+fi
+
+echo "Compilation complete: $output_file"
