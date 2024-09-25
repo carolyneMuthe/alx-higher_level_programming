@@ -1,0 +1,6 @@
+#include "lists.h"
+def islower(c):
+    if c.islower():
+        return (true)
+    else:
+        return (false)
