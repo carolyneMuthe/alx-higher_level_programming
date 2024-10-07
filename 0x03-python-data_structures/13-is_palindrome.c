@@ -16,13 +16,13 @@ listint_t *reverse_list(listint_t *head)
 
     while (current != NULL)
     {
-        next = current->next;  /* store next node */
-        current->next = prev;  /* reverse current node's pointer */
-        prev = current;        /* move prev and current one step forward */
+        next = current->next;  // Store next node
+        current->next = prev;  // Reverse current node's pointer
+        prev = current;        // Move prev and current one step forward
         current = next;
     }
 
-    return prev;  /* new head of the reversed list */
+    return prev;  // New head of the reversed list
 }
 
 /**
@@ -34,13 +34,14 @@ listint_t *reverse_list(listint_t *head)
 int is_palindrome(listint_t **head)
 {
     if (*head == NULL || (*head)->next == NULL)
-        return 1;
+        return 1;  // An empty list or a single node is a palindrome
 
     listint_t *slow = *head;
     listint_t *fast = *head;
     listint_t *second_half;
     listint_t *prev_of_slow = NULL;
 
+    // Find the middle of the list
     while (fast != NULL && fast->next != NULL)
     {
         fast = fast->next->next;
@@ -48,26 +49,39 @@ int is_palindrome(listint_t **head)
         slow = slow->next;
     }
 
-    second_half = slow;  /* slow is now at the middle */
-    prev_of_slow->next = NULL;  /* terminate first half */
-    second_half = reverse_list(second_half);  /* reverse second half */
+    // Handle odd-sized lists
+    if (fast != NULL) 
+    {
+        second_half = slow->next;  // Skip the middle element
+    } 
+    else 
+    {
+        second_half = slow;  // For even-sized lists
+    }
 
+    // Reverse the second half
+    second_half = reverse_list(second_half);
     listint_t *first_half = *head;
-    int result = 1;  /* assume it's a palindrome */
-    
+
+    // Compare the two halves
+    int result = 1;  // Assume it's a palindrome
     while (second_half != NULL)
     {
         if (first_half->n != second_half->n)
         {
-            result = 0;  /* not a palindrome */
+            result = 0;  // Not a palindrome
             break;
         }
         first_half = first_half->next;
         second_half = second_half->next;
     }
 
-    second_half = reverse_list(second_half);  /* restore original order */
-    prev_of_slow->next = second_half;  /* reconnect the first half */
+    // Restore the original list (optional)
+    second_half = reverse_list(second_half);
+    if (prev_of_slow != NULL)
+    {
+        prev_of_slow->next = second_half;
+    }
 
-    return result;  /* return whether it's a palindrome */
+    return result;  // Return whether it's a palindrome
 }
