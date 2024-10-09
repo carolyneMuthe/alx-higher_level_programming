@@ -3,8 +3,7 @@ import math
 
 
 class MagicClass:
-    """A class that represents a circle with radius, area,
-          and circumference."""
+    """A class that represents a circle with radius, area and circumference."""
 
     def __init__(self, radius=0):
         """
