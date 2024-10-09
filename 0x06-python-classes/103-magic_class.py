@@ -4,7 +4,7 @@ import math
 
 class MagicClass:
     """A class that represents a circle with radius, area,
-                                           and circumference."""
+          and circumference."""
 
     def __init__(self, radius=0):
         """
@@ -15,12 +15,12 @@ class MagicClass:
 
         Raises:
             TypeError: If radius is not a number.
+            ValueError: If radius is less than 0.
         """
-        self.__radius = 0  # Default value
-
-        # Check if radius is a number (int or float)
-        if type(radius) is not int and type(radius) is not float:
+        if not isinstance(radius, (int, float)):
             raise TypeError("radius must be a number")
+        if radius < 0:
+            raise ValueError("radius must be >= 0")
 
         self.__radius = radius  # Set the radius
 
