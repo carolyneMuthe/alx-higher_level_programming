@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 """
-This module defines a class Square with private instance attributes size and position.
+This module defines a class Square with private instance attributes size and
+position.
 """
 
 
 class Square:
     """
     This class represents a square with private size and position attributes.
-    It includes methods to get and set the size and position, calculate the area,
-    and print the square using the '#' character.
+    It includes methods to get and set the size and position, calculate the
+    area, and print the square using the '#' character.
     """
 
     def __init__(self, size=0, position=(0, 0)):
@@ -17,10 +18,12 @@ class Square:
 
         Args:
             size (int, optional): The size of the square. Defaults to 0.
-            position (tuple, optional): The position of the square. Defaults to (0, 0).
+            position (tuple, optional): The position of the square. Defaults to
+            (0, 0).
 
         Raises:
-            TypeError: If size is not an integer or if position is not a tuple of 2 positive integers.
+            TypeError: If size is not an integer or if position is not a tuple
+            of 2 positive integers.
             ValueError: If size is less than 0.
         """
         self.size = size  # Use the setter to set the size
@@ -106,5 +109,4 @@ class Square:
 
         # Print the square with the correct horizontal position
         for _ in range(self.__size):
-            print(" " * self.__position[0] + "#" * self.__size)  # Horizontal spacing and square row
-
+            print(" " * self.__position[0] + "#" * self.__size)  # Row printing
