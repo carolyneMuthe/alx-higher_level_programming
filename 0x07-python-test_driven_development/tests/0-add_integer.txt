@@ -1,3 +1,6 @@
+"""
+Tests for add_integer function.
+
 >>> from 0-add_integer import add_integer
 >>> add_integer(1, 2)
 3
@@ -15,3 +18,4 @@ TypeError: b must be an integer
 Traceback (most recent call last):
     ...
 TypeError: a must be an integer
+"""
